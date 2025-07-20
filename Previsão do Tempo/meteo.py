@@ -68,7 +68,7 @@ for cidade in cidades.keys():
 plt.title("Previsão da Temperatura Máxima - Próximos 7 dias")
 plt.xlabel("Data")
 plt.ylabel("Temperatura Máxima (°C)")
-plt.grid(True)
+plt.grid(False)
 plt.legend()
 plt.tight_layout()
 plt.savefig("previsao_temperatura.png")
