@@ -56,7 +56,6 @@ MAPA_COR_RACA = {
 # 3. FUNÇÕES DE DOWNLOAD E CARREGAMENTO
 # ===================================================================
 def baixar_arquivo(url: str, destino: Path):
-    """Baixa um arquivo de uma URL para um destino local se ele não existir."""
     if not destino.exists():
         with st.spinner(f"Baixando {destino.name}... Isso pode levar alguns segundos."):
             try:
@@ -72,7 +71,6 @@ def baixar_arquivo(url: str, destino: Path):
 
 @st.cache_resource
 def carregar_modelo_e_colunas():
-    """Baixa e carrega o modelo e as colunas, se necessário."""
     baixar_arquivo(MODELO_URL, CAMINHO_MODELO)
     baixar_arquivo(COLUNAS_URL, CAMINHO_COLUNAS)
     try:
@@ -86,7 +84,6 @@ def carregar_modelo_e_colunas():
 
 @st.cache_data
 def carregar_dados_ceara():
-    """Baixa e carrega os dados do Ceará, se necessário."""
     baixar_arquivo(DADOS_URL, CAMINHO_DADOS)
     try:
         return pd.read_csv(CAMINHO_DADOS)
@@ -139,12 +136,8 @@ def aba_analise_exploratoria(df):
         
         fig.update_layout(
             title_text=f'Curva de Densidade das Notas de {nome_materia}',
-            xaxis_title="Nota",
-            yaxis_title="Densidade",
-            plot_bgcolor='white',
-            xaxis_showgrid=False,
-            yaxis_showgrid=False,
-            showlegend=False
+            xaxis_title="Nota", yaxis_title="Densidade", plot_bgcolor='white',
+            xaxis_showgrid=False, yaxis_showgrid=False, showlegend=False
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -182,8 +175,13 @@ def aba_previsao_notas(modelo, colunas):
         st.markdown("---")
         
         # ===== CÓDIGO DO GRÁFICO CORRIGIDO =====
-        df_resultados = pd.DataFrame({'Prova':, 'Nota Estimada': previsao})
-        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=)
+        df_resultados = pd.DataFrame({
+            'Prova':,
+            'Nota Estimada': previsao
+        })
+        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas',
+                     text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'),
+                     color='Prova', range_y=)
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
