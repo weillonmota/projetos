@@ -290,13 +290,13 @@ treinar_e_salvar_modelo_final(dados_limpos_ceara, melhor_k)
 > --- 🎉 PROJETO FINALIZADO ---
 > ```
 
-## ✨ Sessão Bônus: A Aplicação Prática em um Dashboard Interativo
+## ✨ Sessão Bônus: A Aplicação Prática em um Dashboard Interativo  
 
 Após todo o trabalho de limpeza, otimização e treinamento, o produto final não é apenas o código, mas o modelo salvo (modelo_knn.joblib) e seu manual (colunas_modelo.json), prontos para serem usados.
 
 O Dashboard interativo é a prova de conceito de que nosso modelo funciona na prática. Ele permite que qualquer pessoa interaja com o "cérebro" do Machine Learning que acabamos de criar.
 
-## 📊 Objetivo do Dashboard
+## 📊 Objetivo do Dashboard  
 O objetivo é transformar a lógica complexa do nosso código Python em uma ferramenta acessível e visual. O dashboard, implementado no arquivo dashboard.py (em anexo no repositório), faz o seguinte:
 
 - Carrega o Modelo e o Manual: Ele usa o joblib para carregar o modelo_knn.joblib e o json para carregar as colunas necessárias.  
@@ -307,15 +307,18 @@ O objetivo é transformar a lógica complexa do nosso código Python em uma ferr
 
 - Exibe os Resultados: Ele apresenta as notas previstas de forma clara e visual, provando que o processo de ponta a ponta (ETL, Treinamento, Produção) foi bem-sucedido.  
 
-## 🎨 Sobre o Streamlit
+## 🎨 Sobre o Streamlit  
 Para construir o dashboard, utilizamos a biblioteca Streamlit.
 
 O Streamlit é uma ferramenta de código aberto que permite transformar scripts de análise de dados e Machine Learning em aplicativos da web interativos e bonitos com pouquíssimas linhas de código. É a solução perfeita para demonstrar o potencial do nosso modelo sem a necessidade de aprender tecnologias complexas de desenvolvimento web (como HTML, CSS e JavaScript). Ele lida com a interatividade, o layout e a implantação de forma quase mágica.  
 
-## 🔗 Veja o Modelo em Ação
+## 🔗 Veja o Modelo em Ação  
 Você pode interagir e testar o poder de previsão do modelo k-NN treinado neste projeto através do link de implantação:  
 
 [Veja o projeto clicando aqui!](https://projetos-262dc3bahjdyph3gmfuexf.streamlit.app/)
+
+## 🚀 Conclusão  
+Este projeto transforma dados brutos em inteligência acionável. Seguindo estes passos, construímos um sistema que aprendeu a encontrar padrões no perfil dos estudantes e, com base neles, fazer previsões sobre seu desempenho no ENEM. O uso do k-NN mostra como conceitos de "similaridade" e "vizinhança" podem ser ferramentas poderosas no mundo do Machine Learning.
 
 ## 🧑‍💻 Autor
 
