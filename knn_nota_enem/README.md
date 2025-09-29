@@ -290,7 +290,7 @@ treinar_e_salvar_modelo_final(dados_limpos_ceara, melhor_k)
 > --- 🎉 PROJETO FINALIZADO ---
 > ```
 
-## ✨ Sessão Bônus: A Aplicação Prática em um Dashboard Interativo  
+## ✨ Sessão Bônus: Aplicação Prática em um Dashboard Interativo  
 
 Após todo o trabalho de limpeza, otimização e treinamento, o produto final não é apenas o código, mas o modelo salvo (`modelo_knn.joblib`) e seu manual (`colunas_modelo.json`), prontos para serem usados.
 
