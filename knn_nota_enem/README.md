@@ -287,14 +287,10 @@ treinar_e_salvar_modelo_final(dados_limpos_ceara, melhor_k)
 > 💾 Modelo salvo em: 'modelo_knn.joblib'
 > 💾 Colunas salvas em: 'colunas_modelo.json'
 >
-> --- ✨ PROJETO FINALIZADO ---
+> --- 🎉 PROJETO FINALIZADO ---
 > ```
 
-## 🚀 Conclusão
-Este projeto transforma dados brutos em inteligência acionável. Seguindo estes passos, construímos um sistema que aprendeu a encontrar padrões no perfil dos estudantes e, com base neles, fazer previsões sobre seu desempenho no ENEM. O uso do k-NN mostra como conceitos de "similaridade" e "vizinhança" podem ser ferramentas poderosas no mundo do Machine Learning.
-
-
-##✨ Sessão Bônus: A Aplicação Prática em um Dashboard Interativo
+## ✨ Sessão Bônus: A Aplicação Prática em um Dashboard Interativo
 
 Após todo o trabalho de limpeza, otimização e treinamento, o produto final não é apenas o código, mas o modelo salvo (modelo_knn.joblib) e seu manual (colunas_modelo.json), prontos para serem usados.
 
@@ -315,45 +311,6 @@ O objetivo é transformar a lógica complexa do nosso código Python em uma ferr
 Para construir o dashboard, utilizamos a biblioteca Streamlit.
 
 O Streamlit é uma ferramenta de código aberto que permite transformar scripts de análise de dados e Machine Learning em aplicativos da web interativos e bonitos com pouquíssimas linhas de código. É a solução perfeita para demonstrar o potencial do nosso modelo sem a necessidade de aprender tecnologias complexas de desenvolvimento web (como HTML, CSS e JavaScript). Ele lida com a interatividade, o layout e a implantação de forma quase mágica.  
-
-Se você deseja o texto da seção final sem as marcações de código (```) e mantendo a formatação visual do Markdown (como títulos, negrito e listas), aqui está o conteúdo em formato de texto.
-
-Etapa 4: Treinamento e Salvamento do Modelo Final (Final do Código)
-Python
-
-# Executa o treinamento final com o melhor 'k' encontrado
-treinar_e_salvar_modelo_final(dados_limpos_ceara, melhor_k)
-Saída:
-
---- 🚂 Treinando e salvando o modelo final com k = 19 ---
-✅ Modelo final treinado com sucesso!
-💾 Modelo salvo em: 'modelo_knn.joblib'
-💾 Colunas salvas em: 'colunas_modelo.json'
---- 🚀 PROJETO CONCLUÍDO ---
-
-🚀 Conclusão
-Este projeto transforma dados brutos em inteligência acionável. Seguindo estes passos, construímos um sistema que aprendeu a encontrar padrões no perfil dos estudantes e, com base neles, fazer previsões sobre seu desempenho no ENEM. O uso do k-NN mostra como conceitos de "similaridade" e "vizinhança" podem ser ferramentas poderosas no mundo do Machine Learning.
-
-✨ Sessão Bônus: A Aplicação Prática em um Dashboard Interativo
-Após todo o trabalho de limpeza, otimização e treinamento, o produto final não é apenas o código, mas o modelo salvo (modelo_knn.joblib) e seu manual (colunas_modelo.json), prontos para serem usados.
-
-O Dashboard interativo é a prova de conceito de que nosso modelo funciona na prática. Ele permite que qualquer pessoa interaja com o "cérebro" do Machine Learning que acabamos de criar.
-
-📊 Objetivo do Dashboard
-O objetivo é transformar a lógica complexa do nosso código Python em uma ferramenta acessível e visual. O dashboard, implementado no arquivo dashboard.py (em anexo no repositório), faz o seguinte:
-
-Carrega o Modelo e o Manual: Ele usa o joblib para carregar o modelo_knn.joblib e o json para carregar as colunas necessárias.
-
-Coleta o Perfil do Usuário: Ele apresenta widgets simples para o usuário informar suas características socioeconômicas (Q006, Q002, TP_ESCOLA, etc.) – exatamente as COLUNAS_FEATURES que o modelo espera.
-
-Realiza a Previsão: Ele insere as informações do usuário no modelo e recebe as notas previstas nas cinco áreas do conhecimento (COLUNAS_ALVO).
-
-Exibe os Resultados: Ele apresenta as notas previstas de forma clara e visual, provando que o processo de ponta a ponta (ETL, Treinamento, Produção) foi bem-sucedido.
-
-🎨 Sobre o Streamlit
-Para construir o dashboard, utilizamos a biblioteca Streamlit.
-
-O Streamlit é uma ferramenta de código aberto que permite transformar scripts de análise de dados e Machine Learning em aplicativos da web interativos e bonitos com pouquíssimas linhas de código. É a solução perfeita para demonstrar o potencial do nosso modelo sem a necessidade de aprender tecnologias complexas de desenvolvimento web (como HTML, CSS e JavaScript). Ele lida com a interatividade, o layout e a implantação de forma quase mágica.
 
 ## 🔗 Veja o Modelo em Ação
 Você pode interagir e testar o poder de previsão do modelo k-NN treinado neste projeto através do link de implantação:  
