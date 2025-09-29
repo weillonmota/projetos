@@ -21,13 +21,13 @@ MODELO_URL = "https://github.com/weillonmota/projetos/releases/download/v1.0-dad
 COLUNAS_URL = "https://github.com/weillonmota/projetos/releases/download/v1.0-dados/colunas_modelo.json"
 DADOS_URL = "https://github.com/weillonmota/projetos/releases/download/v1.0-dados/dados_ceara.csv"
 
-# Caminhos locais onde os arquivos serão salvos no ambiente do Streamlit
+# Caminhos locais onde os arquivos serão salvos
 PASTA_DADOS = Path("dados_app")
 CAMINHO_MODELO = PASTA_DADOS / "modelo_knn.joblib"
 CAMINHO_COLUNAS = PASTA_DADOS / "colunas_modelo.json"
 CAMINHO_DADOS = PASTA_DADOS / "dados_ceara.csv"
 
-# Dicionários de mapeamento (do seu código original)
+# Dicionários de mapeamento
 MAPA_RENDA = {
     'Nenhuma Renda': 'A', 'Até R$ 1.320,00': 'B', 'De R$ 1.320,01 até R$ 1.980,00': 'C',
     'De R$ 1.980,01 até R$ 2.640,00': 'D', 'De R$ 2.640,01 até R$ 3.300,00': 'E',
@@ -55,74 +55,73 @@ MAPA_COR_RACA = {
 # ===================================================================
 # 3. FUNÇÕES DE DOWNLOAD E CARREGAMENTO
 # ===================================================================
-def baixar_arquivo(url: str, destino: Path):
-    if not destino.exists():
-        with st.spinner(f"Baixando {destino.name}... Isso pode levar alguns segundos."):
-            try:
-                response = requests.get(url, stream=True)
-                response.raise_for_status()
-                destino.parent.mkdir(parents=True, exist_ok=True)
-                with open(destino, "wb") as f:
-                    for chunk in response.iter_content(chunk_size=8192):
-                        f.write(chunk)
-            except requests.exceptions.RequestException as e:
-                st.error(f"Erro ao baixar {destino.name}: {e}")
-                st.stop()
+def baixar_arquivo(url, caminho_destino):
+    """Verifica se um arquivo existe, e se não, faz o download dele."""
+    if not caminho_destino.exists():
+        st.write(f"Baixando {caminho_destino.name}...")
+        try:
+            response = requests.get(url, stream=True)
+            response.raise_for_status() # Lança um erro para status HTTP ruins
+            with open(caminho_destino, "wb") as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        except requests.exceptions.RequestException as e:
+            st.error(f"Erro ao baixar o arquivo {caminho_destino.name}: {e}")
+            return False
+    return True
 
 @st.cache_resource
 def carregar_modelo_e_colunas():
-    baixar_arquivo(MODELO_URL, CAMINHO_MODELO)
-    baixar_arquivo(COLUNAS_URL, CAMINHO_COLUNAS)
-    try:
-        modelo = joblib.load(CAMINHO_MODELO)
-        with open(CAMINHO_COLUNAS, 'r') as f:
-            colunas = json.load(f)
-        return modelo, colunas
-    except Exception as e:
-        st.error(f"Erro ao carregar modelo ou colunas: {e}")
-        return None, None
+    """Baixa e carrega o modelo e as colunas."""
+    if baixar_arquivo(MODELO_URL, CAMINHO_MODELO) and baixar_arquivo(COLUNAS_URL, CAMINHO_COLUNAS):
+        try:
+            modelo = joblib.load(CAMINHO_MODELO)
+            with open(CAMINHO_COLUNAS, 'r') as f:
+                colunas = json.load(f)
+            return modelo, colunas
+        except Exception as e:
+            st.error(f"Erro ao carregar o modelo ou as colunas: {e}")
+            return None, None
+    return None, None
 
 @st.cache_data
 def carregar_dados_ceara():
-    baixar_arquivo(DADOS_URL, CAMINHO_DADOS)
-    try:
-        return pd.read_csv(CAMINHO_DADOS)
-    except Exception as e:
-        st.error(f"Erro ao carregar dados do Ceará: {e}")
-        return None
+    """Baixa e carrega o CSV com os dados do Ceará."""
+    if baixar_arquivo(DADOS_URL, CAMINHO_DADOS):
+        try:
+            return pd.read_csv(CAMINHO_DADOS)
+        except Exception as e:
+            st.error(f"Erro ao carregar o arquivo de dados: {e}")
+            return None
+    return None
 
 # ===================================================================
-# 4. FUNÇÕES DAS ABAS (CÓDIGO ORIGINAL RESTAURADO E CORRIGIDO)
+# 4. FUNÇÕES DAS ABAS (permanecem inalteradas)
 # ===================================================================
 def aba_analise_exploratoria(df):
     st.header('Análise dos Dados Históricos do ENEM no Ceará')
     
     col1, col2 = st.columns(2)
     with col1:
-        # CORREÇÃO 1: Usar df.shape para pegar apenas o número de linhas (participantes)
-        st.metric("Total de Participantes", f"{df.shape:,}".replace(",", "."))
-        # CORREÇÃO 2: Calcular a média para cada matéria específica
-        st.metric("Média de Ciências da Natureza", f"{df.mean():.2f}")
-        st.metric("Média de Matemática", f"{df.mean():.2f}")
+        st.metric("Total de Participantes", f"{df.shape[0]:,}".replace(",", "."))
+        st.metric("Média de Ciências da Natureza", f"{df['NU_NOTA_CN'].mean():.2f}")
+        st.metric("Média de Matemática", f"{df['NU_NOTA_MT'].mean():.2f}")
     with col2:
-        st.metric("Média de Ciências Humanas", f"{df.mean():.2f}")
-        st.metric("Média de Linguagens e Códigos", f"{df.mean():.2f}")
-        st.metric("Média da Redação", f"{df.mean():.2f}")
+        st.metric("Média de Ciências Humanas", f"{df['NU_NOTA_CH'].mean():.2f}")
+        st.metric("Média de Linguagens e Códigos", f"{df['NU_NOTA_LC'].mean():.2f}")
+        st.metric("Média da Redação", f"{df['NU_NOTA_REDACAO'].mean():.2f}")
         
     st.markdown("---")
     
     st.sidebar.header("Filtros para Análise")
-    # CORREÇÃO 3: Usar a coluna correta para o filtro de escola
     tipo_escola_filtro = st.sidebar.multiselect(
-        'Selecione o Tipo de Escola:', options=df.unique(), default=df.unique(),
+        'Selecione o Tipo de Escola:', options=df['TP_ESCOLA'].unique(), default=df['TP_ESCOLA'].unique(),
         format_func=lambda x: {2: 'Pública', 3: 'Privada'}.get(x, 'Outro')
     )
     df_filtrado = df.query("TP_ESCOLA in @tipo_escola_filtro")
     st.subheader('Distribuição das Notas')
-    
     materia_selecionada = st.selectbox(
-        'Selecione a matéria:', 
-        options=,
+        'Selecione a matéria:', options=['NU_NOTA_MT', 'NU_NOTA_REDACAO', 'NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC'],
         format_func=lambda x: x.replace("NU_NOTA_", "").replace("REDACAO", "REDAÇÃO").replace("MT", "MATEMÁTICA").replace("CN", "CIÊNCIAS DA NATUREZA").replace("CH", "CIÊNCIAS HUMANAS").replace("LC", "LINGUAGENS E CÓDIGOS")
     )
 
@@ -138,8 +137,12 @@ def aba_analise_exploratoria(df):
         
         fig.update_layout(
             title_text=f'Curva de Densidade das Notas de {nome_materia}',
-            xaxis_title="Nota", yaxis_title="Densidade", plot_bgcolor='white',
-            xaxis_showgrid=False, yaxis_showgrid=False, showlegend=False
+            xaxis_title="Nota",
+            yaxis_title="Densidade",
+            plot_bgcolor='white',
+            xaxis_showgrid=False,
+            yaxis_showgrid=False,
+            showlegend=False
         )
         st.plotly_chart(fig, use_container_width=True)
 
@@ -155,4 +158,49 @@ def aba_previsao_notas(modelo, colunas):
     st.header('Preveja a Nota de um Novo Aluno')
     with st.form("prediction_form"):
         st.markdown("**Insira os dados socioeconômicos do aluno:**")
-        col1, col2
+        col1, col2 = st.columns(2)
+        with col1:
+            renda = st.selectbox("Renda mensal da família:", options=list(MAPA_RENDA.keys()))
+            escolaridade_mae = st.selectbox("Escolaridade da mãe:", options=list(MAPA_ESCOLARIDADE_MAE.keys()))
+        with col2:
+            tipo_escola = st.selectbox("Tipo de escola no Ens. Médio:", options=list(MAPA_TIPO_ESCOLA.keys()))
+            cor_raca = st.selectbox("Como você se autodeclara?", options=list(MAPA_COR_RACA.keys()))
+        submit_button = st.form_submit_button("✨ Prever Notas")
+    
+    if submit_button:
+        dados_usuario = {'Q006': MAPA_RENDA[renda], 'Q002': MAPA_ESCOLARIDADE_MAE[escolaridade_mae], 'TP_ESCOLA': MAPA_TIPO_ESCOLA[tipo_escola], 'TP_COR_RACA': MAPA_COR_RACA[cor_raca], 'SG_UF_ESC': 'CE'}
+        input_df = pd.DataFrame([dados_usuario])
+        input_encoded = pd.get_dummies(input_df)
+        final_input = input_encoded.reindex(columns=colunas, fill_value=0)
+        with st.spinner("Analisando perfil e calculando..."):
+            previsao = modelo.predict(final_input)
+            media_geral = np.mean(previsao[0])
+        st.success("Previsão Concluída!")
+        st.subheader("Resultados Estimados:")
+        st.metric(label="**Média Geral Prevista**", value=f"{media_geral:.2f}")
+        st.markdown("---")
+        df_resultados = pd.DataFrame({'Prova': ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Códigos', 'Matemática', 'Redação'], 'Nota Estimada': previsao[0]})
+        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=[0, 1000])
+        fig.update_layout(showlegend=False)
+        st.plotly_chart(fig, use_container_width=True)
+
+# ===================================================================
+# 5. EXECUÇÃO PRINCIPAL DO DASHBOARD
+# ===================================================================
+st.title('Dashboard de Análise e Previsão ENEM 2021 a 2023 - Ceará')
+
+# Garante que a pasta de dados existe
+PASTA_DADOS.mkdir(exist_ok=True)
+
+modelo_knn, colunas_modelo = carregar_modelo_e_colunas()
+df_ceara = carregar_dados_ceara()
+
+if df_ceara is None or modelo_knn is None:
+    st.error("Falha ao baixar ou carregar os arquivos necessários. Verifique os links e a sua conexão.")
+    st.stop()
+
+tab1, tab2 = st.tabs(["📊 Análise Exploratória", "🤖 Previsão de Notas"])
+with tab1:
+    aba_analise_exploratoria(df_ceara)
+with tab2:
+    aba_previsao_notas(modelo_knn, colunas_modelo)
