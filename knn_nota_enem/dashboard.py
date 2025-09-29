@@ -169,16 +169,9 @@ def aba_previsao_notas(modelo, colunas):
         st.success("Previsão Concluída!")
         st.subheader("Resultados Estimados:")
         st.metric(label="**Média Geral Prevista**", value=f"{media_geral:.2f}")
-        st.markdown("---")
-        
-        # ===== CÓDIGO DO GRÁFICO CORRIGIDO =====
-        df_resultados = pd.DataFrame({
-            'Prova':,
-            'Nota Estimada': previsao
-        })
-        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas',
-                     text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'),
-                     color='Prova', range_y=)
+        st.markdown("---")        
+        df_resultados = pd.DataFrame({'Prova': ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Códigos', 'Matemática', 'Redação'], 'Nota Estimada': previsao[0]})
+        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=[0, 1000])
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
@@ -201,4 +194,5 @@ with tab1:
     aba_analise_exploratoria(df_ceara)
 with tab2:
     aba_previsao_notas(modelo_knn, colunas_modelo)
+
 
