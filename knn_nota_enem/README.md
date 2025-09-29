@@ -312,7 +312,7 @@ Para construir o dashboard, utilizamos a biblioteca Streamlit.
 
 O Streamlit é uma ferramenta de código aberto que permite transformar scripts de análise de dados e Machine Learning em aplicativos da web interativos e bonitos com pouquíssimas linhas de código. É a solução perfeita para demonstrar o potencial do nosso modelo sem a necessidade de aprender tecnologias complexas de desenvolvimento web (como HTML, CSS e JavaScript). Ele lida com a interatividade, o layout e a implantação de forma quase mágica.  
 
-## 📊 Veja o Modelo em Ação  
+## 🎯 Veja o Modelo em Ação  
 Você pode interagir e testar o poder de previsão do modelo k-NN treinado neste projeto através do link de implantação:  
 
 👉[Veja o projeto clicando aqui!](https://projetos-262dc3bahjdyph3gmfuexf.streamlit.app/)
