@@ -8,13 +8,26 @@ import json
 import plotly.express as px
 import plotly.figure_factory as ff
 import numpy as np
+import requests
+from pathlib import Path
 
 st.set_page_config(layout="wide", page_title="Dashboard ENEM - Ceará")
 
 # ===================================================================
-# 2. CONSTANTES E DICIONÁRIOS
+# 2. CONSTANTES, URLs E CAMINHOS LOCAIS
 # ===================================================================
-# (Esta seção permanece inalterada)
+# URLs dos seus arquivos no GitHub Releases
+MODELO_URL = "https://github.com/weillonmota/projetos/releases/download/v1.0-dados/modelo_knn.joblib"
+COLUNAS_URL = "https://github.com/weillonmota/projetos/releases/download/v1.0-dados/colunas_modelo.json"
+DADOS_URL = "https://github.com/weillonmota/projetos/releases/download/v1.0-dados/dados_ceara.csv"
+
+# Caminhos locais onde os arquivos serão salvos no ambiente do Streamlit
+PASTA_DADOS = Path("dados_app")
+CAMINHO_MODELO = PASTA_DADOS / "modelo_knn.joblib"
+CAMINHO_COLUNAS = PASTA_DADOS / "colunas_modelo.json"
+CAMINHO_DADOS = PASTA_DADOS / "dados_ceara.csv"
+
+# Dicionários de mapeamento (inalterados)
 MAPA_RENDA = {
     'Nenhuma Renda': 'A', 'Até R$ 1.320,00': 'B', 'De R$ 1.320,01 até R$ 1.980,00': 'C',
     'De R$ 1.980,01 até R$ 2.640,00': 'D', 'De R$ 2.640,01 até R$ 3.300,00': 'E',
@@ -40,55 +53,76 @@ MAPA_COR_RACA = {
 }
 
 # ===================================================================
-# 3. FUNÇÕES DE CARREGAMENTO
+# 3. FUNÇÕES DE DOWNLOAD E CARREGAMENTO
 # ===================================================================
-# (Esta seção permanece inalterada)
+def baixar_arquivo(url: str, destino: Path):
+    """Baixa um arquivo de uma URL para um destino local se ele não existir."""
+    if not destino.exists():
+        with st.spinner(f"Baixando {destino.name}... Isso pode levar alguns segundos."):
+            try:
+                response = requests.get(url, stream=True)
+                response.raise_for_status()
+                
+                destino.parent.mkdir(parents=True, exist_ok=True)
+                
+                with open(destino, "wb") as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+            except requests.exceptions.RequestException as e:
+                st.error(f"Erro ao baixar {destino.name}: {e}")
+                st.stop()
+
 @st.cache_resource
 def carregar_modelo_e_colunas():
+    """Baixa e carrega o modelo e as colunas, se necessário."""
+    baixar_arquivo(MODELO_URL, CAMINHO_MODELO)
+    baixar_arquivo(COLUNAS_URL, CAMINHO_COLUNAS)
     try:
-        modelo = joblib.load('modelo_knn.joblib')
-        with open('colunas_modelo.json', 'r') as f:
+        modelo = joblib.load(CAMINHO_MODELO)
+        with open(CAMINHO_COLUNAS, 'r') as f:
             colunas = json.load(f)
         return modelo, colunas
-    except FileNotFoundError:
+    except Exception as e:
+        st.error(f"Erro ao carregar modelo ou colunas: {e}")
         return None, None
 
 @st.cache_data
 def carregar_dados_ceara():
+    """Baixa e carrega os dados do Ceará, se necessário."""
+    baixar_arquivo(DADOS_URL, CAMINHO_DADOS)
     try:
-        return pd.read_csv('dados_ceara.csv')
-    except FileNotFoundError:
+        return pd.read_csv(CAMINHO_DADOS)
+    except Exception as e:
+        st.error(f"Erro ao carregar dados do Ceará: {e}")
         return None
 
 # ===================================================================
-# 4. FUNÇÕES DAS ABAS 
+# 4. FUNÇÕES DAS ABAS (SEU CÓDIGO ORIGINAL, SEM ALTERAÇÕES)
 # ===================================================================
 def aba_analise_exploratoria(df):
     st.header('Análise dos Dados Históricos do ENEM no Ceará')
     
     col1, col2 = st.columns(2)
-    #... (métricas inalteradas)
     with col1:
-        st.metric("Total de Participantes", f"{df.shape[0]:,}".replace(",", "."))
-        st.metric("Média de Ciências da Natureza", f"{df['NU_NOTA_CN'].mean():.2f}")
-        st.metric("Média de Matemática", f"{df['NU_NOTA_MT'].mean():.2f}")
+        st.metric("Total de Participantes", f"{df.shape:,}".replace(",", "."))
+        st.metric("Média de Ciências da Natureza", f"{df.mean():.2f}")
+        st.metric("Média de Matemática", f"{df.mean():.2f}")
     with col2:
-        st.metric("Média de Ciências Humanas", f"{df['NU_NOTA_CH'].mean():.2f}")
-        st.metric("Média de Linguagens e Códigos", f"{df['NU_NOTA_LC'].mean():.2f}")
-        st.metric("Média da Redação", f"{df['NU_NOTA_REDACAO'].mean():.2f}")
+        st.metric("Média de Ciências Humanas", f"{df.mean():.2f}")
+        st.metric("Média de Linguagens e Códigos", f"{df.mean():.2f}")
+        st.metric("Média da Redação", f"{df.mean():.2f}")
         
     st.markdown("---")
     
     st.sidebar.header("Filtros para Análise")
-    #... (filtros inalterados)
     tipo_escola_filtro = st.sidebar.multiselect(
-        'Selecione o Tipo de Escola:', options=df['TP_ESCOLA'].unique(), default=df['TP_ESCOLA'].unique(),
+        'Selecione o Tipo de Escola:', options=df.unique(), default=df.unique(),
         format_func=lambda x: {2: 'Pública', 3: 'Privada'}.get(x, 'Outro')
     )
     df_filtrado = df.query("TP_ESCOLA in @tipo_escola_filtro")
     st.subheader('Distribuição das Notas')
     materia_selecionada = st.selectbox(
-        'Selecione a matéria:', options=['NU_NOTA_MT', 'NU_NOTA_REDACAO', 'NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC'],
+        'Selecione a matéria:', options=,
         format_func=lambda x: x.replace("NU_NOTA_", "").replace("REDACAO", "REDAÇÃO").replace("MT", "MATEMÁTICA").replace("CN", "CIÊNCIAS DA NATUREZA").replace("CH", "CIÊNCIAS HUMANAS").replace("LC", "LINGUAGENS E CÓDIGOS")
     )
 
@@ -102,14 +136,13 @@ def aba_analise_exploratoria(df):
         fig.add_vline(x=media, line_width=3, line_dash="dash", line_color="red")
         fig.add_vline(x=mediana, line_width=3, line_dash="dot", line_color="green")
         
-        # --- ALTERAÇÃO AQUI: Melhorando o layout do gráfico ---
         fig.update_layout(
             title_text=f'Curva de Densidade das Notas de {nome_materia}',
-            xaxis_title="Nota",      # Adiciona título ao eixo X
-            yaxis_title="Densidade", # Adiciona título ao eixo Y
-            plot_bgcolor='white',    # Define o fundo do gráfico como branco
-            xaxis_showgrid=False,    # Remove as linhas de grade do eixo X
-            yaxis_showgrid=False,    # Remove as linhas de grade do eixo Y
+            xaxis_title="Nota",
+            yaxis_title="Densidade",
+            plot_bgcolor='white',
+            xaxis_showgrid=False,
+            yaxis_showgrid=False,
             showlegend=False
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -123,7 +156,6 @@ def aba_analise_exploratoria(df):
         st.warning("Nenhum dado disponível para os filtros selecionados.")
 
 def aba_previsao_notas(modelo, colunas):
-    # (Esta função permanece inalterada)
     st.header('Preveja a Nota de um Novo Aluno')
     with st.form("prediction_form"):
         st.markdown("**Insira os dados socioeconômicos do aluno:**")
@@ -142,13 +174,13 @@ def aba_previsao_notas(modelo, colunas):
         final_input = input_encoded.reindex(columns=colunas, fill_value=0)
         with st.spinner("Analisando perfil e calculando..."):
             previsao = modelo.predict(final_input)
-            media_geral = np.mean(previsao[0])
+            media_geral = np.mean(previsao)
         st.success("Previsão Concluída!")
         st.subheader("Resultados Estimados:")
         st.metric(label="**Média Geral Prevista**", value=f"{media_geral:.2f}")
         st.markdown("---")
-        df_resultados = pd.DataFrame({'Prova': ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Códigos', 'Matemática', 'Redação'], 'Nota Estimada': previsao[0]})
-        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=[0, 1000])
+        df_resultados = pd.DataFrame({'Prova':, 'Nota Estimada': previsao})
+        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=)
         fig.update_layout(showlegend=False)
         st.plotly_chart(fig, use_container_width=True)
 
@@ -161,8 +193,10 @@ modelo_knn, colunas_modelo = carregar_modelo_e_colunas()
 df_ceara = carregar_dados_ceara()
 
 if df_ceara is None or modelo_knn is None:
-    st.error("Arquivos de dados ou do modelo não foram encontrados. Execute o notebook de ETL e treinamento primeiro.")
+    st.error("Falha ao carregar os arquivos de dados ou do modelo. Verifique os logs e os links no código.")
     st.stop()
+
+st.success("Arquivos de dados e modelo carregados com sucesso!")
 
 tab1, tab2 = st.tabs(["📊 Análise Exploratória", "🤖 Previsão de Notas"])
 with tab1:
