@@ -20,7 +20,7 @@ O código está organizado em um notebook Jupyter (`etl.ipynb`) e dividido em qu
 
 Antes de começar qualquer projeto de programação, é uma boa prática organizar as ferramentas. Nesta primeira célula do código, nós:
 - **Importamos as bibliotecas**: Ferramentas como `pandas` (para mexer com tabelas) e `scikit-learn` (para Machine Learning).
-- **Centralizamos as informações**: Definimos nomes de arquivos e colunas em um único lugar. Isso é como ter uma "lista de compras" antes de ir ao mercado; se precisarmos mudar algo, sabemos exatamente onde olhar.
+- **Centralizamos as informações**: Definimos nomes de arquivos e colunas em um único lugar. Isso é como ter uma "lista de compras" antes de ir ao mercado e se precisarmos mudar algo, sabemos exatamente onde olhar.
 
 ```python
 # Importação de bibliotecas essenciais
