@@ -27,7 +27,7 @@ CAMINHO_MODELO = PASTA_DADOS / "modelo_knn.joblib"
 CAMINHO_COLUNAS = PASTA_DADOS / "colunas_modelo.json"
 CAMINHO_DADOS = PASTA_DADOS / "dados_ceara.csv"
 
-# Dicionários de mapeamento (inalterados do seu código original)
+# Dicionários de mapeamento (do seu código original)
 MAPA_RENDA = {
     'Nenhuma Renda': 'A', 'Até R$ 1.320,00': 'B', 'De R$ 1.320,01 até R$ 1.980,00': 'C',
     'De R$ 1.980,01 até R$ 2.640,00': 'D', 'De R$ 2.640,01 até R$ 3.300,00': 'E',
@@ -95,7 +95,7 @@ def carregar_dados_ceara():
         return None
 
 # ===================================================================
-# 4. FUNÇÕES DAS ABAS (CÓDIGO ORIGINAL RESTAURADO)
+# 4. FUNÇÕES DAS ABAS (CÓDIGO ORIGINAL RESTAURADO E CORRIGIDO)
 # ===================================================================
 def aba_analise_exploratoria(df):
     st.header('Análise dos Dados Históricos do ENEM no Ceará')
@@ -120,7 +120,7 @@ def aba_analise_exploratoria(df):
     df_filtrado = df.query("TP_ESCOLA in @tipo_escola_filtro")
     st.subheader('Distribuição das Notas')
     
-    # LINHA CORRIGIDA: Adicionando a lista de opções
+    # ===== LINHA CORRIGIDA =====
     materia_selecionada = st.selectbox(
         'Selecione a matéria:', 
         options=,
@@ -180,6 +180,8 @@ def aba_previsao_notas(modelo, colunas):
         st.subheader("Resultados Estimados:")
         st.metric(label="**Média Geral Prevista**", value=f"{media_geral:.2f}")
         st.markdown("---")
+        
+        # ===== CÓDIGO DO GRÁFICO CORRIGIDO =====
         df_resultados = pd.DataFrame({'Prova':, 'Nota Estimada': previsao})
         fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=)
         fig.update_layout(showlegend=False)
