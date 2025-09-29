@@ -67,7 +67,7 @@ Os dados brutos do ENEM são gigantescos e um pouco bagunçados. Para que nosso 
     - Filtramos os dados para manter apenas os registros de estudantes do Ceará (`CE`).
 3.  **Carregar**: Juntamos todos os dados limpos de diferentes anos em uma única tabela e a salvamos como `dados_ceara.csv`. Ter esse arquivo limpo economiza muito tempo, pois não precisamos repetir essa faxina toda vez que rodamos o projeto.
 
-**⚠️ Observação Importante sobre a Amostragem:**
+**⚠️ Observação Importante sobre a Amostragem:**  
 *Para diminuir o universo de dados e focar a análise em um contexto específico, optamos por limitar a amostragem a estudantes do Ceará (CE). No entanto, para compensar essa redução e aumentar a robustez do modelo, incluímos um período maior de tempo, utilizando as notas do ENEM de três anos (2021 a 2023). O objetivo desse balanceamento é fornecer uma base sólida o suficiente para melhorar o índice MAE (Erro Médio Absoluto), a métrica de erro que será detalhada na seção de treinamento do modelo k-NN.* 
 
 ```python
