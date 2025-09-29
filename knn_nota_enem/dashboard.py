@@ -116,11 +116,8 @@ def aba_analise_exploratoria(df):
     )
     df_filtrado = df.query("TP_ESCOLA in @tipo_escola_filtro")
     st.subheader('Distribuição das Notas')
-    
-    # ===== LINHA CORRIGIDA =====
     materia_selecionada = st.selectbox(
-        'Selecione a matéria:', 
-        options=,
+        'Selecione a matéria:', options=['NU_NOTA_MT', 'NU_NOTA_REDACAO', 'NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC'],
         format_func=lambda x: x.replace("NU_NOTA_", "").replace("REDACAO", "REDAÇÃO").replace("MT", "MATEMÁTICA").replace("CN", "CIÊNCIAS DA NATUREZA").replace("CH", "CIÊNCIAS HUMANAS").replace("LC", "LINGUAGENS E CÓDIGOS")
     )
 
@@ -204,3 +201,4 @@ with tab1:
     aba_analise_exploratoria(df_ceara)
 with tab2:
     aba_previsao_notas(modelo_knn, colunas_modelo)
+
