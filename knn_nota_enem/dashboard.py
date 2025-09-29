@@ -99,7 +99,9 @@ def aba_analise_exploratoria(df):
     
     col1, col2 = st.columns(2)
     with col1:
+        # CORREÇÃO 1: Usar df.shape para pegar apenas o número de linhas (participantes)
         st.metric("Total de Participantes", f"{df.shape:,}".replace(",", "."))
+        # CORREÇÃO 2: Calcular a média para cada matéria específica
         st.metric("Média de Ciências da Natureza", f"{df.mean():.2f}")
         st.metric("Média de Matemática", f"{df.mean():.2f}")
     with col2:
@@ -110,14 +112,17 @@ def aba_analise_exploratoria(df):
     st.markdown("---")
     
     st.sidebar.header("Filtros para Análise")
+    # CORREÇÃO 3: Usar a coluna correta para o filtro de escola
     tipo_escola_filtro = st.sidebar.multiselect(
         'Selecione o Tipo de Escola:', options=df.unique(), default=df.unique(),
         format_func=lambda x: {2: 'Pública', 3: 'Privada'}.get(x, 'Outro')
     )
     df_filtrado = df.query("TP_ESCOLA in @tipo_escola_filtro")
     st.subheader('Distribuição das Notas')
+    
     materia_selecionada = st.selectbox(
-        'Selecione a matéria:', options=['NU_NOTA_MT', 'NU_NOTA_REDACAO', 'NU_NOTA_CN', 'NU_NOTA_CH', 'NU_NOTA_LC'],
+        'Selecione a matéria:', 
+        options=,
         format_func=lambda x: x.replace("NU_NOTA_", "").replace("REDACAO", "REDAÇÃO").replace("MT", "MATEMÁTICA").replace("CN", "CIÊNCIAS DA NATUREZA").replace("CH", "CIÊNCIAS HUMANAS").replace("LC", "LINGUAGENS E CÓDIGOS")
     )
 
@@ -150,49 +155,4 @@ def aba_previsao_notas(modelo, colunas):
     st.header('Preveja a Nota de um Novo Aluno')
     with st.form("prediction_form"):
         st.markdown("**Insira os dados socioeconômicos do aluno:**")
-        col1, col2 = st.columns(2)
-        with col1:
-            renda = st.selectbox("Renda mensal da família:", options=list(MAPA_RENDA.keys()))
-            escolaridade_mae = st.selectbox("Escolaridade da mãe:", options=list(MAPA_ESCOLARIDADE_MAE.keys()))
-        with col2:
-            tipo_escola = st.selectbox("Tipo de escola no Ens. Médio:", options=list(MAPA_TIPO_ESCOLA.keys()))
-            cor_raca = st.selectbox("Como você se autodeclara?", options=list(MAPA_COR_RACA.keys()))
-        submit_button = st.form_submit_button("✨ Prever Notas")
-    if submit_button:
-        dados_usuario = {'Q006': MAPA_RENDA[renda], 'Q002': MAPA_ESCOLARIDADE_MAE[escolaridade_mae], 'TP_ESCOLA': MAPA_TIPO_ESCOLA[tipo_escola], 'TP_COR_RACA': MAPA_COR_RACA[cor_raca], 'SG_UF_ESC': 'CE'}
-        input_df = pd.DataFrame([dados_usuario])
-        input_encoded = pd.get_dummies(input_df)
-        final_input = input_encoded.reindex(columns=colunas, fill_value=0)
-        with st.spinner("Analisando perfil e calculando..."):
-            previsao = modelo.predict(final_input)
-            media_geral = np.mean(previsao)
-        st.success("Previsão Concluída!")
-        st.subheader("Resultados Estimados:")
-        st.metric(label="**Média Geral Prevista**", value=f"{media_geral:.2f}")
-        st.markdown("---")        
-        df_resultados = pd.DataFrame({'Prova': ['Ciências da Natureza', 'Ciências Humanas', 'Linguagens e Códigos', 'Matemática', 'Redação'], 'Nota Estimada': previsao[0]})
-        fig = px.bar(df_resultados, x='Prova', y='Nota Estimada', title='Distribuição das Notas Previstas', text=df_resultados['Nota Estimada'].apply(lambda x: f'{x:.2f}'), color='Prova', range_y=[0, 1000])
-        fig.update_layout(showlegend=False)
-        st.plotly_chart(fig, use_container_width=True)
-
-# ===================================================================
-# 5. EXECUÇÃO PRINCIPAL DO DASHBOARD
-# ===================================================================
-st.title('Dashboard de Análise e Previsão ENEM 2021 a 2023 - Ceará')
-
-modelo_knn, colunas_modelo = carregar_modelo_e_colunas()
-df_ceara = carregar_dados_ceara()
-
-if df_ceara is None or modelo_knn is None:
-    st.error("Falha ao carregar os arquivos de dados ou do modelo. Verifique os logs e os links no código.")
-    st.stop()
-
-st.success("Arquivos de dados e modelo carregados com sucesso!")
-
-tab1, tab2 = st.tabs(["📊 Análise Exploratória", "🤖 Previsão de Notas"])
-with tab1:
-    aba_analise_exploratoria(df_ceara)
-with tab2:
-    aba_previsao_notas(modelo_knn, colunas_modelo)
-
-
+        col1, col2
