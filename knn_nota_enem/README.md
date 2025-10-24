@@ -402,7 +402,7 @@ O Streamlit é uma ferramenta de código aberto que permite transformar scripts 
 ## 🎯 Veja o Modelo em Ação  
 Você pode interagir e testar o poder de previsão do modelo k-NN treinado neste projeto através do link de implantação:  
 
-👉[Veja o projeto clicando aqui!](https://projetos-262dc3bahjdyph3gmfuexf.streamlit.app/)
+👉[Veja o projeto clicando aqui!](https://enem-knn.streamlit.app/)
 
 ## 🚀 Conclusão  
 Este projeto transforma dados brutos em inteligência acionável. Seguindo estes passos, construímos um sistema que aprendeu a encontrar padrões no perfil dos estudantes e, com base neles, fazer previsões sobre seu desempenho no ENEM. O uso do k-NN mostra como conceitos de "similaridade" e "vizinhança" podem ser ferramentas poderosas no mundo do Machine Learning.
