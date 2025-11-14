@@ -1,3 +1,4 @@
+# ENEM + Data Warehouse: Sua Nota em Dados - Construindo o Futuro com Tableau!
 ## 🎯 Introdução e Motivação
 
 Este projeto mergulha fundo nos dados do ENEM 2023 para **desvendar padrões de desempenho** dos estudantes. Meu objetivo principal foi criar um **dashboard interativo no Tableau** que permitisse explorar esses dados de diversas formas, tornando a análise mais acessível e visual para qualquer um interessado nos resultados do exame.
@@ -744,7 +745,12 @@ Lá você pode visualizar o desempenho por cidade, comparar estados, analisar co
 👉 [Acesse o dashboard aqui](https://public.tableau.com/app/profile/weillon.mota/viz/enem_2023/DistribuioporCidade)  
 
 ---
+🎥 Vídeo Explicativo
+Assista a uma apresentação completa do projeto, desde o ETL até a navegação no dashboard final:
 
+👉 [Apresentação do Projeto no YouTube](https://www.youtube.com/watch?v=PAkCC1kT188)
+
+---
 ## 🚀 Tecnologias Utilizadas
 
 * **Python:** Linguagem de programação para o ETL.
