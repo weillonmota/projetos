@@ -404,6 +404,11 @@ Você pode interagir e testar o poder de previsão do modelo k-NN treinado neste
 
 👉[Veja o projeto clicando aqui!](https://enem-knn.streamlit.app/)
 
+## 🎥 Vídeo Explicativo
+Assista a uma apresentação completa do projeto, explicando o processo de ETL, otimização do modelo KNN e a aplicação no Streamlit:
+
+👉 [Apresentação do Projeto no YouTube](https://youtu.be/kAeqwdlEs4o)
+
 ## 🚀 Conclusão  
 Este projeto transforma dados brutos em inteligência acionável. Seguindo estes passos, construímos um sistema que aprendeu a encontrar padrões no perfil dos estudantes e, com base neles, fazer previsões sobre seu desempenho no ENEM. O uso do k-NN mostra como conceitos de "similaridade" e "vizinhança" podem ser ferramentas poderosas no mundo do Machine Learning.
 
