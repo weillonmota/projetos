@@ -1,4 +1,4 @@
-# ENEM + Data Warehouse: Sua Nota em Dados - Construindo o Futuro com Tableau!
+# Análise de dados do ENEM através da construção de um Data Warehouse
 ## 🎯 Introdução e Motivação
 
 Este projeto mergulha fundo nos dados do ENEM 2023 para **desvendar padrões de desempenho** dos estudantes. Meu objetivo principal foi criar um **dashboard interativo no Tableau** que permitisse explorar esses dados de diversas formas, tornando a análise mais acessível e visual para qualquer um interessado nos resultados do exame.
