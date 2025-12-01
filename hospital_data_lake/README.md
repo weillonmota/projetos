@@ -719,7 +719,7 @@ Para viabilizar a análise performática no Power BI, transformamos o dataset pl
         
 -   **Tecnologia:** DuckDB executando SQL em memória e exportando para formato **Parquet** (colunar), garantindo alta compressão e velocidade.
 
-![Modelagem Dimensional (Star Schema](evidencias/005.jpg)
+![Modelagem Dimensional (Star Schema](evidencias/005.JPG)
     
 
 ### 2. Análise de Sentimento (State-of-the-Art NLP)
@@ -992,7 +992,7 @@ Para profissionalizar o acesso aos dados e permitir consultas SQL diretas sobre 
 
 O **AWS Glue Crawler** foi utilizado para escanear automaticamente a camada Gold no S3, inferir o esquema dos arquivos (Parquet e CSV) e criar as tabelas no Data Catalog.
 
-![AWS Glue Crawler](evidencias/006.jpg)
+![AWS Glue Crawler](evidencias/006.JPG)
 
 -   **Crawler Name:** `crawler_hospital_gold`
     
@@ -1011,7 +1011,7 @@ O **AWS Glue Crawler** foi utilizado para escanear automaticamente a camada Gold
 
 O **AWS Athena** atua como a interface SQL para os dados armazenados no S3, permitindo queries interativas e servindo como backend para ferramentas de BI.
 
-![AWS Athena](evidencias/007.jpg)
+![AWS Athena](evidencias/007.JPG)
 
 -   **Configuração Obrigatória:** Definição do _Query Result Location_ no S3 (`s3://.../athena-results/`) para armazenar os metadados das consultas.
     
@@ -1047,7 +1047,7 @@ O coração da integração é o **AWS Glue Data Catalog**. O Crawler (`crawler_
 
 O AWS Athena foi configurado como o motor de consulta _serverless_.
 
-![ODBC](evidencias/008.jpg)
+![ODBC](evidencias/008.JPG)
 
 
 -   **Query Engine:** Athena executa consultas SQL diretamente sobre os arquivos Parquet/CSV no S3, eliminando a necessidade de um servidor de banco de dados tradicional.
@@ -1100,11 +1100,11 @@ Para responder a essas questões, o dashboard no Power BI foi dividido em três 
 -   **Demanda e Geografia (Q1 e Q3):** Utilização de **Gráficos de Barras (Top N)** e **Treemaps** para evidenciar a alta concentração de atendimentos na Região Metropolitana e o ranking das especialidades mais buscadas.
     
 -   **Perfil e Tendência (Q2 e Q4):** Implementação de uma **Pirâmide Etária** dinâmica e **Gráficos de Linha** temporais, permitindo a comparação de sazonalidade entre os anos fiscais.
-![vq](evidencias/009.jpg)
+![vq](evidencias/009.JPG)
     
 -   **Inteligência Artificial (Q5 e Q6):** Aplicação dos resultados do modelo **BERT**, visualizados através de gráficos de **Rosca (Sentimento Predominante)** e tabelas detalhadas que expõem as principais críticas e elogios extraídos das redes sociais.
 
-![v2](evidencias/010.jpg)
+![v2](evidencias/010.JPG)
 
 ## ✨ Resultados e Insights
 
