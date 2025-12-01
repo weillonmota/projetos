@@ -763,5 +763,5 @@ Assista a uma apresentação completa do projeto, desde o ETL até a navegação
 
 **Weillon Mota**
 
-* [Seu LinkedIn](https://www.linkedin.com/in/weillonmota/)  
-* [Seu GitHub](https://github.com/weillonmota/projetos)  
+* [LinkedIn](https://www.linkedin.com/in/weillonmota/)  
+* [GitHub](https://github.com/weillonmota/projetos)  
