@@ -1,3 +1,4 @@
 .env
 __pycache__/
-*.json
+*.jsonteste.py
+teste_chaves.py
