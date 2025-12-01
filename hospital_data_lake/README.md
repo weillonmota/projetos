@@ -40,7 +40,7 @@ A segurança é _prioridade zero_! Bloqueamos o acesso público ao _bucket_ e cr
 
 Abaixo, o _screenshot_ da política customizada criada no console IAM, garantindo a restrição de acesso ao S3.
 
-![Políticas IAM](../evidencias/001.jpg)
+![Políticas IAM](./evidencias/001.jpg)
 
 ### 3. Coleta e Ingestão de Dados Estruturados (SUS)
 
@@ -57,7 +57,7 @@ Os dados estruturados do HUOL foram coletados no portal do Governo Federal, exig
 
 Aqui está o _screenshot_ do _bucket_ S3, demonstrando a presença dos 7 arquivos CSV brutos de internações na pasta `/bronze`.
 
-![bucket S3](../evidencias/002.jpg)
+![bucket S3](/evidencias/002.jpg)
 
 
 ### 4. Coleta de Dados Não Estruturados (Web Scraping com Selenium)
