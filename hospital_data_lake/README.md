@@ -1139,8 +1139,7 @@ Explore os resultados da análise no dashboard interativo a seguir.
 🎥 Vídeo Explicativo
 Assista a uma apresentação completa do projeto, desde o ETL, implementação na nuvem, até o dashboard final:
 
-👉 [Apresentação do Projeto no YouTube](xxxxxxxxxxxxxxxxxxx)
-
+👉 [Apresentação do Projeto no YouTube](https://youtu.be/AhEkEgAdKYw)
 ---
 ## 🚀 Tecnologias Utilizadas
 
