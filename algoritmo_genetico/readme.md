@@ -11,6 +11,8 @@ Diferente de uma seleção tradicional baseada apenas em notas, aqui utilizamos 
 2.  **Diversidade Socioeconômica** (Renda, Escola e Raça).
     
 3.  **Cobertura Geográfica** (Distribuição pelos estados do Brasil).
+
+![RESUMO](resumo.jpg)
     
 
 ----------
