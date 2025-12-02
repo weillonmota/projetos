@@ -335,7 +335,7 @@ Explore a ferramenta online clicando no link abaixo.
 
 Assista a uma demonstração completa do algoritmo rodando e da análise dos resultados na interface web:
 
-👉 **[Apresentação do Projeto no YouTube](https://www.google.com/search?q=LINK_DO_SEU_VIDEO_AQUI)**
+👉 **[Apresentação do Projeto no YouTube](https://youtu.be/xAnRBAN9FcY)**
 
 ----------
 
