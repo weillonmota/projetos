@@ -1133,13 +1133,13 @@ A arquitetura combina dados estruturados (governamentais) e não estruturados (r
 
 Explore os resultados da análise no dashboard interativo a seguir.
 
-👉 **[Acesse o Dashboard Interativo ](https://app.powerbi.com/view?r=eyJrIjoiNTVmYzIxNWQtYWNkYy00M2FmLWE1OTYtZDVhMTNiMzkxYmZjIiwidCI6IjE5OTA0MTBmLTJlYzctNDIyZi1iNmY3LTMzNDVkMGJjNTMzMyJ9)**
+👉 **[Acesse o Dashboard Interativo](https://app.powerbi.com/view?r=eyJrIjoiNTVmYzIxNWQtYWNkYy00M2FmLWE1OTYtZDVhMTNiMzkxYmZjIiwidCI6IjE5OTA0MTBmLTJlYzctNDIyZi1iNmY3LTMzNDVkMGJjNTMzMyJ9)**
 
 ---
 🎥 Vídeo Explicativo
 Assista a uma apresentação completa do projeto, desde o ETL, implementação na nuvem, até o dashboard final:
 
-👉 **[[Apresentação do Projeto no YouTube](https://youtu.be/AhEkEgAdKYw)**
+👉 **[Apresentação do Projeto no YouTube](https://youtu.be/AhEkEgAdKYw)**
 ---
 ## 🚀 Tecnologias Utilizadas
 
