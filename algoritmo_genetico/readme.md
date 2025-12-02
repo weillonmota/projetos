@@ -1,4 +1,4 @@
-# 🎓 Projeto: Otimização de Bolsas de Estudo ENEM Algorítmo Genético
+# 🎓 Projeto: Otimização de Bolsas de Estudo ENEM Algoritmo Genético
 
 ## 🎯 Visão Geral do Projeto
 
