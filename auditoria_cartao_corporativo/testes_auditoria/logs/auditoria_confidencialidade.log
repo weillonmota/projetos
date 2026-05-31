@@ -1,0 +1,12 @@
+[2026-05-25 18:02:06] --- INÍCIO DO TESTE DE CONFIDENCIALIDADE ---
+[2026-05-25 18:02:07] ⚠️ ALERTA: A página está pública, mas os dados textuais puros foram mascarados ou não foram capturados pelo script de raspagem simples.
+[2026-05-25 18:02:07] --- FIM DO TESTE DE CONFIDENCIALIDADE ---
+
+[2026-05-25 18:03:57] --- INÍCIO DO TESTE DE EXTRAÇÃO BRUTA DE DADOS ---
+[2026-05-25 18:03:58] ✅ SUCESSO: O Airtable barrou a requisição direta à API interna. Status HTTP: 401
+[2026-05-25 18:03:58] --- FIM DO TESTE DE EXTRAÇÃO BRUTA DE DADOS ---
+
+[2026-05-31 16:10:30] --- INÍCIO DO TESTE DE EXTRAÇÃO BRUTA DE DADOS ---
+[2026-05-31 16:10:31] ✅ SUCESSO: O Airtable barrou a requisição direta à API interna. Status HTTP: 401
+[2026-05-31 16:10:31] --- FIM DO TESTE DE EXTRAÇÃO BRUTA DE DADOS ---
+

@@ -1,0 +1,9 @@
+========================================================
+ SUITE DE TESTES CONSOLIDADA - PIPELINE DE EXTRAÇÃO
+ Data de Execução: 2026-05-31 15:30:22
+========================================================
+
+[2026-05-31 15:30:22] [SUCESSO] TESTE 1 (Tolerância a Falhas): O sistema barrou a conversão de tipo inválido controladamente: could not convert string to float: 'VALOR_TEXTO_INVALIDO'
+[2026-05-31 15:30:22] [SUCESSO] TESTE 2 (Maturidade Estrutural): A ausência de chaves estruturais foi capturada com sucesso: KeyError 'VALOR TRANSAÇÃO'
+[2026-05-31 15:30:22] [SUCESSO] TESTE 3 (Resiliência de Diretório): O pipeline identificou a pasta vazia e encerrou a execução de forma elegante.
+[2026-05-31 15:30:22] [SUCESSO] TESTE 4 (Robustez contra Nulos): O pipeline evitou o processamento de nulos gerando a exceção: Invalid value 'SAQUE EM ESPÉCIE' for dtype 'float64'

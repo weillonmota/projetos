@@ -1,0 +1,4 @@
+[2026-05-25 18:40:10] --- INÍCIO DO TESTE DE INTEGRIDADE ---
+[2026-05-25 18:40:10] [Status HTTP: 404] ✅ SUCESSO: O sistema bloqueou a tentativa de alteração anônima. Os dados originais do Airtable permanecem íntegros.
+[2026-05-25 18:40:10] --- FIM DO TESTE DE INTEGRIDADE ---
+
