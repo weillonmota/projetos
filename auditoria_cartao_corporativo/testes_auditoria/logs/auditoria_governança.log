@@ -2,3 +2,11 @@
 [2026-05-25 18:48:00] ✅ SUCESSO: Foram encontrados indícios de logs de auditoria ou histórico de revisões integrados na aplicação.
 [2026-05-25 18:48:00] --- FIM DO TESTE DE GOVERNANÇA ---
 
+[2026-05-31 21:30:41] --- INÍCIO DO TESTE DE GOVERNANÇA E VERSIONAMENTO ---
+[2026-05-31 21:30:41] ❌ ERRO: Token de API não encontrado. Defina a variável de ambiente 'AIRTABLE_API_TOKEN'.
+[2026-05-31 21:31:02] --- INÍCIO DO TESTE DE GOVERNANÇA E VERSIONAMENTO ---
+[2026-05-31 21:31:03] ❌ ERRO / RISCO DE GOVERNANÇA: A API não tem acesso aos logs de versionamento.
+Erro na consulta API: É necessário comprar o plano Enterprise para poder liberar o Scope 'enterprise.auditLogs:read'.
+[2026-05-31 21:31:03] Detalhes técnicos da recusa (HTTP 404): {"error":"NOT_FOUND"}
+[2026-05-31 21:31:03] --- FIM DO TESTE DE GOVERNANÇA ---
+
